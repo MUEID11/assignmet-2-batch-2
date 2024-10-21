@@ -24,6 +24,7 @@ const Tracker = ({ data, handleSubmit, isActive, setIsActive, dataToEdit, setEdi
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    
     const submittedData = {
       id: dataToEdit?.id || crypto.randomUUID(), // Reuse ID if editing
       amount: Number(editFormData.amount) || 0,
@@ -31,8 +32,14 @@ const Tracker = ({ data, handleSubmit, isActive, setIsActive, dataToEdit, setEdi
       type: isActive,
       category: editFormData.category,
     };
+  
     handleSubmit(submittedData);
+  
+    // Resetting the form fields after submission
+    setEditFormData({ amount: '', date: '', category: '' });
+    setIsActive(''); // Resetting type (if needed)
   };
+  
 
   return (
     <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
